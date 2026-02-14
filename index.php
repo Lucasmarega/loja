@@ -12,6 +12,12 @@ global $produto;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Senac Hell Claro</title>
+    <style>
+    table,tr,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    </style>
 </head>
 <body>
 
