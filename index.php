@@ -1,21 +1,42 @@
 <?php
-include_once "configs/database.php";
+include_once "objetos/produtoControler.php";
 
-$banco = new Database();
-$bd = $banco -> conectar();
+$controller = new produtoControler();
+$produto = $controller->index();
+global $produto;
+?>
 
-if ($bd) {
-    $sql = "SELECT * FROM produtos";
-    $resultado = $bd->query($sql);
-    $resultado -> execute();
-    $resultado = $resultado -> fetchAll(PDO::FETCH_ASSOC);
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Senac Hell Claro</title>
+</head>
+<body>
 
-    foreach ($resultado as $produto) {
-        echo $produto['nome'] . "<br>";
-        echo $produto['descricao'] . "<br>";
-        echo $produto['quantidade'] . "<br>";
-        echo $produto['preco'] . "<br>";
-    }
-}else{
-    echo "falha ao conectar banco";
-}
+<h1>Loja do arrthu</h1>
+<h2>produtos Cadastrado</h2>
+<table>
+    <tr>
+        <td>id</td>
+        <td>nome</td>
+        <td>descrição</td>
+        <td>quantidade</td>
+        <td>preço</td>
+    </tr>
+    <?php if($produto) : ?>
+        <?php foreach($produto as $produto) : ?>
+            <tr>
+                <td><?php echo $produto->id?></td>
+                <td><?php echo $produto->nome?></td>
+                <td><?php echo $produto->descricao?></td>
+                <td><?php echo $produto->quantidade?></td>
+                <td><?php echo $produto->preco?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</table>
+
+</body>
+</html>
