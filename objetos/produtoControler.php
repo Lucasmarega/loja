@@ -16,4 +16,23 @@ Class produtoControler{
     public function index(){
         return $this->produto->lerTodos();
     }
+    public function pesquisarProduto($id){
+        return $this->produto->pesquisaProduto($id);
+    }
+
+    public function cadastrarProduto($dados){
+
+        $this->produto->nome = $dados['nome'];
+        $this->produto->descricao = $dados['descricao'];
+        $this->produto->quantidade = $dados['quantidade'];
+        $this->aluno->preco = $dados['preco'];
+
+
+        if($this->aluno->cadastrar()){
+            header("location: index.php");
+            exit();
+        }
+    }
+
+
 }

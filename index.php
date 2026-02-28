@@ -2,8 +2,17 @@
 include_once "objetos/produtoControler.php";
 
 $controller = new produtoControler();
-$produto = $controller->index();
-global $produto;
+$produtos = $controller->index();
+global $produtos;
+$a = null;
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    if(isset($_POST["pesquisar"])){
+        $a = $controller->pesquisarProduto($_POST["pesquisar"]);
+    }
+}
+
+var_dump($produtos);
 ?>
 
 <!doctype html>
@@ -22,7 +31,19 @@ global $produto;
 <body>
 
 <h1>Loja do arrthu</h1>
-<h2>produtos Cadastrado</h2>
+<a href="cadastro.php">Cadastrar Produto</a>
+<h3>produtos Cadastrado</h3>
+
+<form method="post" action="index.php">
+    <label>ID</label>
+    <input type="number" name="pesquisar">
+    <select name="tipo">
+        <option value="id">ID</option>
+        <option value="descrição">descricao</option>
+    </select>
+    <button>Pesquisar</button>
+</form>
+
 <table>
     <tr>
         <td>id</td>
@@ -31,14 +52,14 @@ global $produto;
         <td>quantidade</td>
         <td>preço</td>
     </tr>
-    <?php if($produto) : ?>
-        <?php foreach($produto as $produto) : ?>
+    <?php if($produtos) : ?>
+        <?php foreach($produtos as $produto) : ?>
             <tr>
-                <td><?php echo $produto->id?></td>
-                <td><?php echo $produto->nome?></td>
-                <td><?php echo $produto->descricao?></td>
-                <td><?php echo $produto->quantidade?></td>
-                <td><?php echo $produto->preco?></td>
+                <td><?= $produto->id; ?></td>
+                <td><?= $produto->nome; ?></td>
+                <td><?= $produto->descricao; ?></td>
+                <td><?= $produto->quantidade; ?></td>
+                <td><?= $produto->preco; ?></td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
