@@ -12,7 +12,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     }
 }
 
-var_dump($produtos);
+if($_SERVER["REQUEST_METHOD"] === "GET"){
+    if(isset($_GET["excluir"])){
+        $a = $controller->excluirProduto($_GET["excluir"]);
+    }
+}
+
+var_dump($a);
 ?>
 
 <!doctype html>
@@ -60,6 +66,8 @@ var_dump($produtos);
                 <td><?= $produto->descricao; ?></td>
                 <td><?= $produto->quantidade; ?></td>
                 <td><?= $produto->preco; ?></td>
+                <td><a href="index.php?excluir=<?= $produto->id ?>">EXCLUIR</a> </td>
+                <td><a href="atualizar.php?alterar=<?= $produto->id ?>">ALTERAR</a> </td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
