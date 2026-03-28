@@ -4,7 +4,7 @@ Class Database {
     private $host = "localhost:3316";
     private $usuario = "root";
     private $senha = "123456";
-    private $banco = "loja";
+    private $banco = "lojaproduto";
     private $con;
 
     public function conectar(){

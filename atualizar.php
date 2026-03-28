@@ -43,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['alterar'])) {
 
 
     <button name="atualizar">atualizar</button>
+    <label for="fileToUpload">selecionar foto</label>
+    <input type="file" name="produto[fileToUpload]" id="fileToUpload"><br><br>
+
 </form>
 
 </body>

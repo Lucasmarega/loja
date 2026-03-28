@@ -5,7 +5,7 @@ Class Produto{
     public $descricao;
     public $quantidade;
     public $preco;
-    public $img;
+    public $imagens;
     public $bd;
 
     public function __construct($bd){
@@ -30,13 +30,14 @@ Class Produto{
     }
 
     public function cadastrar(){
-        $sql = "INSERT INTO produtos (nome, descricao, quantidade, preco) VALUES (:nome, :descricao, :quantidade, :preco)";
+        $sql = "INSERT INTO produtos (nome, descricao, quantidade, preco , imagens) VALUES (:nome, :descricao, :quantidade, :preco, :imagens)";
 
         $stmt = $this->bd->prepare($sql);
         $stmt->bindParam(":nome", $this->nome, PDO::PARAM_STR);
         $stmt->bindParam(":descricao", $this->descricao, PDO::PARAM_STR);
         $stmt->bindParam(":quantidade", $this->quantidade, PDO::PARAM_STR);
         $stmt->bindParam(":preco", $this->preco, PDO::PARAM_STR);
+        $stmt->bindParam(":imagens", $this->imagens, PDO::PARAM_STR);
 
         if($stmt->execute()){
             return true;
@@ -60,14 +61,16 @@ Class Produto{
 
     public function atualizar(){
         $sql = "UPDATE produtos SET nome = :nome, descricao = :descricao, quantidade = :quantidade,
-                  preco = :preco WHERE id = :id";
+                  preco = :preco, imagens = :imagens WHERE id = :id";
 
         $stmt = $this->bd->prepare($sql);
+        $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
         $stmt->bindParam(":nome", $this->nome, PDO::PARAM_STR);
         $stmt->bindParam(":descricao", $this->descricao, PDO::PARAM_STR);
         $stmt->bindParam(":quantidade", $this->quantidade, PDO::PARAM_STR);
         $stmt->bindParam(":preco", $this->preco, PDO::PARAM_STR);
-        $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
+        $stmt->bindParam(":imagens", $this->imagens, PDO::PARAM_STR);
+
 
 
 

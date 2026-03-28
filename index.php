@@ -3,7 +3,6 @@ include_once "objetos/produtoControler.php";
 
 $controller = new produtoControler();
 $produtos = $controller->index();
-global $produtos;
 $a = null;
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -17,8 +16,6 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
         $a = $controller->excluirProduto($_GET["excluir"]);
     }
 }
-
-var_dump($a);
 ?>
 
 <!doctype html>
@@ -26,17 +23,17 @@ var_dump($a);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Senac Hell Claro</title>
+    <title>Senac Rio Claro</title>
     <style>
-    table,tr,td{
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
+        table,tr,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
 
-<h1>Loja do arrthu</h1>
+<h1>Loja Produto</h1>
 <a href="cadastro.php">Cadastrar Produto</a>
 <h3>produtos Cadastrado</h3>
 
@@ -57,6 +54,7 @@ var_dump($a);
         <td>descrição</td>
         <td>quantidade</td>
         <td>preço</td>
+        <td>imagens</td>
     </tr>
     <?php if($produtos) : ?>
         <?php foreach($produtos as $produto) : ?>
@@ -66,8 +64,9 @@ var_dump($a);
                 <td><?= $produto->descricao; ?></td>
                 <td><?= $produto->quantidade; ?></td>
                 <td><?= $produto->preco; ?></td>
-                <td><a href="index.php?excluir=<?= $produto->id ?>">EXCLUIR</a> </td>
-                <td><a href="atualizar.php?alterar=<?= $produto->id ?>">ALTERAR</a> </td>
+                <td><img style="width: 30%;" src="uploads/<?= $produto->imagens;?>"></td>
+                <td><a href="index.php?excluir=<?= $produto->id ?>">EXCLUIR</a></td>
+                <td><a href="atualizar.php?alterar=<?= $produto->id ?>">ALTERAR</a></td>
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
